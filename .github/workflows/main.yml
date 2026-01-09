@@ -37,7 +37,7 @@ jobs:
 
       - name: Build Windows EXE
         run: |
-          lime build windows -release
+          lime build windows
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
