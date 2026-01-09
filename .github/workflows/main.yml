@@ -23,17 +23,17 @@ jobs:
 
       - name: Install libraries
         run: |
-          haxelib install lime -y
-          haxelib install openfl -y
-          haxelib install flixel -y
-          haxelib install flixel-addons -y
-          haxelib install flixel-ui -y
-          haxelib install hxcpp -y
+          haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
+          haxelib install flixel-addons
+          haxelib install flixel-ui
+          haxelib install hxcpp
 
       - name: Lime / OpenFL setup
         run: |
-          haxelib run lime setup -y
-          haxelib run openfl setup -y
+          haxelib run lime setup
+          haxelib run openfl setup
 
       - name: Build Windows EXE
         run: |
