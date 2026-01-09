@@ -18,26 +18,31 @@ jobs:
           haxe-version: 4.3.3
 
       - name: Setup haxelib
+        shell: cmd
         run: |
           haxelib setup %USERPROFILE%\haxelib
 
       - name: Install libraries
+        shell: cmd
         run: |
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib install flixel-addons
-          haxelib install flixel-ui
-          haxelib install hxcpp
+          echo y | haxelib install lime
+          echo y | haxelib install openfl
+          echo y | haxelib install flixel
+          echo y | haxelib install flixel-addons
+          echo y | haxelib install flixel-ui
+          echo y | haxelib install tjson
+          echo y | haxelib install hxcpp
 
       - name: Lime / OpenFL setup
+        shell: cmd
         run: |
-          haxelib run lime setup
-          haxelib run openfl setup
+          echo y | haxelib run lime setup windows
+          echo y | haxelib run openfl setup
 
       - name: Build Windows EXE
+        shell: cmd
         run: |
-          haxelib run lime build windows
+          haxelib run lime build windows -release
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
