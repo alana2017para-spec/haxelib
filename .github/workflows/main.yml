@@ -1,0 +1,46 @@
+name: Build Windows EXE
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.3
+
+      - name: Setup haxelib
+        run: |
+          haxelib setup %USERPROFILE%\haxelib
+
+      - name: Install libraries
+        run: |
+          haxelib install lime -y
+          haxelib install openfl -y
+          haxelib install flixel -y
+          haxelib install flixel-addons -y
+          haxelib install flixel-ui -y
+          haxelib install hxcpp -y
+
+      - name: Lime / OpenFL setup
+        run: |
+          haxelib run lime setup -y
+          haxelib run openfl setup -y
+
+      - name: Build Windows EXE
+        run: |
+          lime build windows -release
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: JogoSimples-Windows
+          path: export/windows/bin
